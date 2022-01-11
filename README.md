@@ -12,25 +12,34 @@ Created by: [ABE](https://habet.dev/about).
 ## Description
 **Bagel Shop** description can be listed here.
 
-## Installation
+## Local Installation
 
 
-Add it to your Gemfile:
-
-```ruby
-gem 'my_example_gem'
-```
-
-Run the following command to install it:
+Clone Project:
 
 ```console
-bundle install
+git clone git@github.com:abe-101/bagel-shop.git
 ```
 
-Run the generator:
+install dependency's :
 
 ```console
-rails generate my_example_gem:install
+pip install cs50
+pip install Flask
+pip install Flask-Session
+pip install psycopg2-binary
+pip install requests
+```
+
+export postgresql env key(replace URI with you db URI):
+
+```console
+export DATABASE_URL=URI
+```
+
+Start flask:
+```console
+flask run
 ```
 
 
