@@ -29,11 +29,6 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 db = SQL(uri)
 
-# Make sure API key is set
-if not os.environ.get("API_KEY"):
-    raise RuntimeError("API_KEY not set")
-
-
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -47,7 +42,7 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    # Query db for users current portfolio
+    # Bagel shop selection menu
     # TODO
     return render_template("index.html")
 
