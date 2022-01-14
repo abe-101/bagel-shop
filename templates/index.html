@@ -1,9 +1,15 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Index
+Breakfast Selection
 {% endblock %}
 
 {% block main %}
-TODO
+    <h1>Breakfast Selection</h1>
+    <form action="/selection" method="post">
+        {% for item in menu %}
+            <input name="selection" type="radio" value="{{ item }}"> {{ item }}
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}
