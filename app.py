@@ -37,14 +37,29 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+MENU = [
+        "Patato Bagel",
+        "Creame Cheese Bagel",
+        "Tuna Bagel",
+        "Egg Salad Bagel".
+        "Breakfast Special"
+        ]
 
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
-    # Bagel shop selection menu
-    # TODO
-    return render_template("index.html")
+    """Allow user to make a breakfast selection"""
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        selection = request.form.get("selection")
+        if selection not in MENU:
+            return apology("Invalid breakfast choice", 400)
+        db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
+                    selection, session["user_id"])
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+        # Bagel shop selection menu
+        return render_template("index.html" menu=MENU)
 
 
 @app.route("/login", methods=["GET", "POST"])
