@@ -29,6 +29,14 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 db = SQL(uri)
 
+MENU = [
+    "Patato Bagel",
+    "Creame Cheese Bagel",
+    "Tuna Bagel",
+    "Egg Salad Bagel",
+    "Breakfast Special"
+]
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -37,35 +45,36 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-MENU = [
-        "Patato Bagel",
-        "Creame Cheese Bagel",
-        "Tuna Bagel",
-        "Egg Salad Bagel".
-        "Breakfast Special"
-        ]
 
 @app.route("/")
 @login_required
 def index():
     """Allow user to make a breakfast selection"""
-    # User reached route via POST (as by submitting a form via POST)
-    if request.method == "POST":
-        selection = request.form.get("selection")
-        if selection not in MENU:
-            return apology("Invalid breakfast choice", 400)
-        db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
-                    selection, session["user_id"])
-    # User reached route via GET (as by clicking a link or via redirect)
-    else:
-        # Bagel shop selection menu
-        return render_template("index.html" menu=MENU)
+    # Bagel shop selection menu
+    return render_template("index.html", menu=MENU)
+
+
+@app.route("/selection", methods=["POST"])
+@login_required
+def selection():
+
+    # User submitted breakfast selection 
+    selection = request.form.get("selection")
+
+    # Validate users selection
+    if selection not in MENU:
+        return apology("Invalid breakfast choice", 400)
+    
+    # Add selection to db
+    db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
+                selection, session["user_id"])
+    
+    return render_template("success.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
-
     # Forget any user_id
     session.clear()
 
