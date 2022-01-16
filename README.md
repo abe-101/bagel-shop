@@ -102,14 +102,18 @@ Your Licensing Information goes here. Example: MIT/X11.
 ## Road Map
 
 ### Web Framework (Flask | Gunicorn)
-- [x] Login | Logout | Register
-- []
+- [x] Login - [x] Logout - [x] Register
+- [ ] index
 
 ### Front-end (HTML | CSS | JS | Bootstrap)
-- [ ] login
-- [ ] Logout
-- [ ] Register
-- [ ] Menu Choice
+- [ ] login.html - [ ] Logout.html - [ ] Register.html
+- [ ] Index.html
+	* Table display of weekly Selection 
+	* Change selection (bagel type button | filling drop down menu)
+- [ ] Admin Pannel
+	* Aproave new user
+	* Change the menu
+	* View/Print the weekly menu
 
 
 ### Database (Postgresql)
