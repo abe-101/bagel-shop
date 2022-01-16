@@ -61,13 +61,13 @@ def index():
     """Allow user to make a breakfast selection"""
     # Bagel shop selection menu
     # get user current selection
-    TODO
-    breakfast = db.execute(" ")
+    #TODO
+    [selection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", session["user_id"])
     # Get Breakfast Choice
-    TODO
-    menu = db.execute(" ") 
+    #TODO
+    menu = db.execute("SELECT * FROM menu") 
 
-    return render_template("index.html", breakfast=breakfast, menu=menu)
+    return render_template("index.html", selection=selection, menu=menu)
 
 
 @app.route("/selection", methods=["POST"])
@@ -85,8 +85,8 @@ def selection():
     db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
                 selection, session["user_id"])
     
-    message = Message("test worked!", recipients=["app@habet.dev"])
-    mail.send(message)
+    #message = Message("test worked!", recipients=["app@habet.dev"])
+    #mail.send(message)
     return render_template("success.html")
 
 
