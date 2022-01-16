@@ -5,12 +5,12 @@
 
 -->
 
-Created by: [ABE](https://habet.dev/about).
+Created by: [ABE](https://habet.dev/about) & [add your name](link)
 
-[![Code Climate](Code Climate Badge IMG URL goes here)](Code Climate URL goes here)
+[![picture here]()
 
 ## Description
-**Bagel Shop** description can be listed here.
+**Breakfast Roster** 
 
 ## Local Installation
 
@@ -60,7 +60,7 @@ Put the usage explanation here
 
 This block of text should explain how to configure your application:
 
-`rails generate my_example_gem:install`
+`Detail heroku set up`
 
 
 ## Information
@@ -72,18 +72,19 @@ Screenshots of your application below:
 ![Screenshot 2](http://placekitten.com/400/300)
 
 
-### Known Issues
+
+## Known Issues
 
 If you discover any bugs, feel free to create an issue on GitHub fork and
 send us a pull request.
 
-[Issues List](Github Issues List URL goes here).
+[Issues List](https://github.com/abe-101/bagel-shop/issues).
 
 ## Authors
 
 * [Abe](https:github.com/abe-101)
 * Additional Author's name (Their Github URL goes here)
-
+	
 
 ## Contributing
 
@@ -98,3 +99,27 @@ send us a pull request.
 
 Your Licensing Information goes here. Example: MIT/X11.
 
+## Road Map
+
+### Web Framework (Flask | Gunicorn)
+- [x] Login | Logout | Register
+- []
+
+### Front-end (HTML | CSS | JS | Bootstrap)
+- [ ] login
+- [ ] Logout
+- [ ] Register
+- [ ] Menu Choice
+
+
+### Database (Postgresql)
+- [x] User table
+- [ ] Menu table
+- [ ] Selection table
+
+
+### Deployment (Github | Heroku | Cloudflare)
+- [x] github
+- [x] Connect github to heroku
+- [x] Auto deployment
+- [ ] Configure domain
