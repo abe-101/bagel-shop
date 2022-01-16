@@ -131,3 +131,12 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] Connect github to heroku
 - [x] Auto deployment
 - [ ] Configure domain
+
+### README
+- [ ] Name
+- [ ] Local Setup
+- [x] Known Issues
+- [x] Authers
+- [x] Contributing
+- [ ] License
+- [ ] Road Map
