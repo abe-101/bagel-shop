@@ -35,6 +35,7 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 db = SQL(uri)
 
+""" Moving to database
 # Breakfast menu
 MENU = [
     "Potato Bagel",
@@ -43,6 +44,7 @@ MENU = [
     "Egg Salad Bagel",
     "Breakfast Special"
 ]
+"""
 
 @app.after_request
 def after_request(response):
@@ -58,7 +60,14 @@ def after_request(response):
 def index():
     """Allow user to make a breakfast selection"""
     # Bagel shop selection menu
-    return render_template("index.html", menu=MENU)
+    # get user current selection
+    TODO
+    breakfast = db.execute(" ")
+    # Get Breakfast Choice
+    TODO
+    menu = db.execute(" ") 
+
+    return render_template("index.html", breakfast=breakfast, menu=menu)
 
 
 @app.route("/selection", methods=["POST"])
@@ -76,7 +85,7 @@ def selection():
     db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
                 selection, session["user_id"])
     
-    message = Message("test worked!", recipients=["abephone718@gmail.com"])
+    message = Message("test worked!", recipients=["app@habet.dev"])
     mail.send(message)
     return render_template("success.html")
 
