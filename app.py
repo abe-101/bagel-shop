@@ -6,31 +6,38 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_mail import Mail, Message
 
-from helpers import apology, login_required, lookup, usd
+
+from helpers import apology, login_required
 
 # Configure application
 app = Flask(__name__)
+app.config["MAIL_DEFAULT_SENDER"] = os.getenv("MAIL_DEFAULT_SENDER")
+app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
+mail = Mail(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-# Custom filter
-app.jinja_env.filters["usd"] = usd
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Configure CS50 Library to use SQLite database
+# Configure CS50 Library to use Postgresql Heroku database
 uri = os.getenv("DATABASE_URL")
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 db = SQL(uri)
 
+# Breakfast menu
 MENU = [
-    "Patato Bagel",
+    "Potato Bagel",
     "Creame Cheese Bagel",
     "Tuna Bagel",
     "Egg Salad Bagel",
@@ -69,6 +76,8 @@ def selection():
     db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
                 selection, session["user_id"])
     
+    message = Message("test worked!", recipients=["abephone718@gmail.com"])
+    mail.send(message)
     return render_template("success.html")
 
 
