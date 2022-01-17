@@ -105,7 +105,8 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] Login
 - [x] Logout
 - [x] Register
-- [ ] index
+- [x] index (users choice & update option
+- [x] selectio POST (update users choice)
 
 ### Front-end (HTML | CSS | JS | Bootstrap)
 - [ ] login.html
@@ -121,9 +122,8 @@ Your Licensing Information goes here. Example: MIT/X11.
 
 
 ### Database (Postgresql)
-- [x] User table
-- [ ] Menu table
-- [ ] Selection table
+- [x] User table with selection
+- [x] Menu table
 
 
 ### Deployment (Github | Heroku | Cloudflare)
