@@ -35,17 +35,6 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 db = SQL(uri)
 
-""" Moving to database
-# Breakfast menu
-MENU = [
-    "Potato Bagel",
-    "Creame Cheese Bagel",
-    "Tuna Bagel",
-    "Egg Salad Bagel",
-    "Breakfast Special"
-]
-"""
-
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -81,12 +70,11 @@ def selection():
         if choice == None:
             continue
         elif choice in menu:
-            day = day.strip("'")
             db.execute(f"UPDATE users SET {day}=(?)", choice)
         else:
             return apology("Not a valid selection", 403)
 
-        #message = Message("test worked!", recipients=["app@habet.dev"])
+    #message = Message("test worked!", recipients=["app@habet.dev"])
     #mail.send(message)
     return render_template("success.html")
 
