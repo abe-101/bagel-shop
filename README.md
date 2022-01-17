@@ -106,7 +106,9 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] Logout
 - [x] Register
 - [x] index (users choice & update option
-- [x] selectio POST (update users choice)
+- [x] selection POST (update users choice)
+- [x] Flask email (email menu)
+- [x] Flask-APScheduler (trigger email weekly)
 
 ### Front-end (HTML | CSS | JS | Bootstrap)
 - [ ] login.html
