@@ -7,7 +7,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_mail import Mail, Message
-
+from flask_apscheduler import APScheduler
 
 from helpers import apology, login_required
 
@@ -20,6 +20,14 @@ app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_USE_SSL"] = True
 app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
 mail = Mail(app)
+
+# initialize scheduler
+scheduler = APScheduler()
+# if you don't wanna use a config, you can set options here:
+scheduler.api_enabled = True
+scheduler.init_app(app)
+scheduler.start()
+
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -34,6 +42,13 @@ uri = os.getenv("DATABASE_URL")
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 db = SQL(uri)
+
+# interval example
+@scheduler.task('cron', id='do_job_1', week='*', day_of_week='mon', hour='14', minute='5')
+def job1():
+    with scheduler.app.app_context():
+        message = Message("test worked!", recipients=["app@habet.dev"])
+        mail.send(message)
 
 @app.after_request
 def after_request(response):
@@ -74,8 +89,6 @@ def selection():
         else:
             return apology("Not a valid selection", 403)
 
-    #message = Message("test worked!", recipients=["app@habet.dev"])
-    #mail.send(message)
     return render_template("success.html")
 
 
