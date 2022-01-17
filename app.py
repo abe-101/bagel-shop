@@ -61,11 +61,9 @@ def index():
     """Allow user to make a breakfast selection"""
     # Bagel shop selection menu
     # get user current selection
-    #TODO
     [pastSelection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", session["user_id"])
-    # Get Breakfast Choice
-    #TODO
-    menu = db.execute("SELECT * FROM menu") 
+    # Get menu from db as a list
+    menu = [i['item'] for i in db.execute("SELECT item FROM menu")]
 
     return render_template("index.html", selection=pastSelection, menu=menu)
 
@@ -74,20 +72,21 @@ def index():
 @login_required
 def selection():
 
-    # User submitted breakfast selection 
-    selection = {}
-    for day in ['sun', 'mon', 'tue', 'wed', 'thu']:
-        selection[day] = request.form.get("day")
-    print(selection)
-
-    # Validate users selection
-    #if selection not in MENU:
-        #return apology("Invalid breakfast choice", 400)
+    # Get menu from db as a list
+    menu = [i['item'] for i in db.execute("SELECT item FROM menu")]
     
-    # Add selection to db
-    #db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
-     #           selection, session["user_id"])
-    #message = Message("test worked!", recipients=["app@habet.dev"])
+    # User submitted breakfast selection
+    for day in ['sun', 'mon', 'tue', 'wed', 'thu']:
+        choice = request.form.get(day)
+        if choice == None:
+            continue
+        elif choice in menu:
+            day = day.strip("'")
+            db.execute(f"UPDATE users SET {day}=(?)", choice)
+        else:
+            return apology("Not a valid selection", 403)
+
+        #message = Message("test worked!", recipients=["app@habet.dev"])
     #mail.send(message)
     return render_template("success.html")
 
