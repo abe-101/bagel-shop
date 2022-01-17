@@ -31,7 +31,7 @@ Breakfast Selection
                         <select name="{{ day }}">
                             <option value="none" selected disabled hidden>Select</option>
                             {% for item in menu %}
-                                <option value="{{ item.item }}">{{ item.item }}</option>
+                                <option value="{{ item }}">{{ item }}</option>
                             {% endfor %}
                         </select>
                     </td>
