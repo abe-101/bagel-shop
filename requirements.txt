@@ -2,7 +2,7 @@ cs50
 Flask
 Flask-Session
 Flask-mail
+Flask-APScheduler
 gunicorn
 psycopg2
 requests
-

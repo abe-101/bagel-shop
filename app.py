@@ -85,7 +85,7 @@ def selection():
         if choice == None:
             continue
         elif choice in menu:
-            db.execute(f"UPDATE users SET {day}=(?)", choice)
+            db.execute(f"UPDATE users SET {day}=(?) WHERE id = (?)", choice, session["user_id"])
         else:
             return apology("Not a valid selection", 403)
 

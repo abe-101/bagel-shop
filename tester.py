@@ -13,10 +13,16 @@ db = SQL(uri)
 
 """ Creates user database """
 # db.execute("CREATE TABLE users (id SERIAL PRIMARY KEY, username  TEXT NOT NULL UNIQUE, hash TEXT NOT NULL, sun TEXT NULL, mon TEXT NULL, tue TEXT NULL, wed TEXT NULL, thu TEXT NULL)")
-[selection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", 1)
+#[selection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", 1)
 # Get Breakfast Choice
-#TODO
-menu = db.execute("SELECT * FROM menu") 
 
-print(selection)
+menu = db.execute("SELECT sun, count(sun) FROM users GROUP BY sun")
+"""
+for day in ['sun', 'mon', 'tue', 'wed', 'thu']:
+    temp = db.execute(f"SELECT {day}, count({day}) FROM users GROUP BY {day}")
+    for dic in temp:
+        print(dic)
+        #for val in dic.values():
+            #print(val)
+"""
 print(menu)
