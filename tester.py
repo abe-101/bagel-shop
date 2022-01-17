@@ -13,7 +13,7 @@ db = SQL(uri)
 
 """ Creates user database """
 # db.execute("CREATE TABLE users (id SERIAL PRIMARY KEY, username  TEXT NOT NULL UNIQUE, hash TEXT NOT NULL, sun TEXT NULL, mon TEXT NULL, tue TEXT NULL, wed TEXT NULL, thu TEXT NULL)")
-selection = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", 1)
+[selection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", 1)
 # Get Breakfast Choice
 #TODO
 menu = db.execute("SELECT * FROM menu") 
