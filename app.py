@@ -62,12 +62,12 @@ def index():
     # Bagel shop selection menu
     # get user current selection
     #TODO
-    [selection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", session["user_id"])
+    [pastSelection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", session["user_id"])
     # Get Breakfast Choice
     #TODO
     menu = db.execute("SELECT * FROM menu") 
 
-    return render_template("index.html", selection=selection, menu=menu)
+    return render_template("index.html", selection=pastSelection, menu=menu)
 
 
 @app.route("/selection", methods=["POST"])
@@ -75,16 +75,18 @@ def index():
 def selection():
 
     # User submitted breakfast selection 
-    selection = request.form.get("selection")
+    selection = {}
+    for day in ['sun', 'mon', 'tue', 'wed', 'thu']:
+        selection[day] = request.form.get("day")
+    print(selection)
 
     # Validate users selection
-    if selection not in MENU:
-        return apology("Invalid breakfast choice", 400)
+    #if selection not in MENU:
+        #return apology("Invalid breakfast choice", 400)
     
     # Add selection to db
-    db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
-                selection, session["user_id"])
-    
+    #db.execute("UPDATE users SET breakfast = (?) WHERE id = (?)",
+     #           selection, session["user_id"])
     #message = Message("test worked!", recipients=["app@habet.dev"])
     #mail.send(message)
     return render_template("success.html")
