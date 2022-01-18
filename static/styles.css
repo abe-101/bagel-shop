@@ -7,17 +7,17 @@ nav .navbar-brand
 /* Colors for brand */
 nav .navbar-brand .blue
 {
-    color: #537fbe;
+    color: #01224F;
 }
 nav .navbar-brand .red
 {
-    color: #ea433b;
+    color: #FF5001;
 }
-nav .navbar-brand .yellow
+nav .navbar-brand .orange
 {
-    color: #f5b82e;
+    color: #F3BC7F;
 }
 nav .navbar-brand .green
 {
-    color: #2e944b;
+    color: #7CBF4B;
 }

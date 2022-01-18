@@ -101,6 +101,10 @@ Your Licensing Information goes here. Example: MIT/X11.
 
 ## Road Map
 
+### New Technologies
+- [x] Flask-APScheduler
+- [ ] Flask-Admin
+
 ### Web Framework (Flask | Gunicorn)
 - [x] Login
 - [x] Logout
