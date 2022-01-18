@@ -16,13 +16,13 @@ db = SQL(uri)
 #[selection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", 1)
 # Get Breakfast Choice
 
-menu = db.execute("SELECT sun, count(sun) FROM users GROUP BY sun")
-"""
+menu = {}
+
 for day in ['sun', 'mon', 'tue', 'wed', 'thu']:
     temp = db.execute(f"SELECT {day}, count({day}) FROM users GROUP BY {day}")
     for dic in temp:
-        print(dic)
-        #for val in dic.values():
-            #print(val)
-"""
+        choice = dic[day]
+        amount = dic['count']
+        menu[day] = menu[day], (choice, amount)
+
 print(menu)
