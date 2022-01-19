@@ -12,18 +12,19 @@ Breakfast Selection
                 {% for day in selection %}
                 <div class="col">
                     <ul class="list-group">
-                        <li class="list-group-item align-items-center">
+                        <li class="list-group-item-mine align-items-center">
                             <h2 class="capitalize">{{ day }}</h2>
                         </li>
-                        <li class="dropdown">
+                        <li class="list-group-item-mine align-items-center">
                             <select class="form-select" name="{{ day }}">
-                                <option value="{{ selection[day] }}" selected >{{ selection[day] }}</option>
+                                <option value="{{ selection[day] }}" disabled selected >{{ selection[day] }}</option>
+                                <div class="dropdown-divider"></div>
                                 {% for item in menu %}
                                     <option value="{{ item }}">{{ item }}</option>
                                 {% endfor %}
                             </select>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center"i>
+                        <li class="list-group-item-mine d-flex justify-content-between align-items-center"i>
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="{{ day }}-ww" data-com.bitwarden.browser.user-edited="yes">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Whole Wheat</label>
@@ -34,6 +35,6 @@ Breakfast Selection
                 {% endfor %}
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary-mine btn-lg">Submit</button>
     </form>
 {% endblock %}

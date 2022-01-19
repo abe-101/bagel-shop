@@ -5,22 +5,19 @@ nav .navbar-brand
 }
 
 /* Colors for brand */
-nav .navbar-brand .blue
-{
-    color: #01224F;
+.bg-wholesome {
+    background-color: #EDA85D;
 }
-nav .navbar-brand .red
-{
-    color: #FF5001;
+.list-group-item-mine {
+    position:relative; display:block ; padding:.5rem 1rem;
+    color:#212529; text-decoration:none; background-color:#FDC484;
+    border:2px solid #333;
 }
-nav .navbar-brand .orange
-{
-    color: #F3BC7F;
-}
-nav .navbar-brand .green
-{
-    color: #7CBF4B;
+.btn-primary-mine {
+    color: #fff;
+    background-color: #FF5001 !important;
+    border-color: #FF5001 !important;
 }
 .capitalize {
     text-transform: capitalize;
-}
+
