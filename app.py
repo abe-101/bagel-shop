@@ -82,9 +82,12 @@ def selection():
     # User submitted breakfast selection
     for day in ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday']:
         choice = request.form.get(day)
+        ww = request.form.get(day+"-ww")
         if choice == None:
             continue
         elif choice in menu:
+            if ww == 'on':
+                choice = "ww-"+choice
             db.execute(f"UPDATE users SET {day}=(?) WHERE id = (?)", choice, session["user_id"])
         else:
             return apology("Not a valid selection", 403)

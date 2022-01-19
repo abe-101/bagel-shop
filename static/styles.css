@@ -21,3 +21,6 @@ nav .navbar-brand .green
 {
     color: #7CBF4B;
 }
+.capitalize {
+    text-transform: capitalize;
+}

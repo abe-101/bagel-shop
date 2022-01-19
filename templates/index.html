@@ -6,23 +6,30 @@ Breakfast Selection
 
 {% block main %}
 <h1>Breakfast Selection</h1>
-    <form data-bitwarden-watching="1" action = "/selection" method = "POST">
+    <form data-bitwarden-watching="1" action="/selection" method="POST">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
                 {% for day in selection %}
                 <div class="col">
-                    <h2>{{ day }}</h2>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" data-com.bitwarden.browser.user-edited="yes">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Whole Wheat</label>
-                    </div>
-
-                    <select class="form-select" name="{{ day }}">
-                        <option value="{{ selection[day] }}" selected >{{ selection[day] }}</option>
-                        {% for item in menu %}
-                            <option value="{{ item }}">{{ item }}</option>
-                        {% endfor %}
-                    </select>
+                    <ul class="list-group">
+                        <li class="list-group-item align-items-center">
+                            <h2 class="capitalize">{{ day }}</h2>
+                        </li>
+                        <li class="dropdown">
+                            <select class="form-select" name="{{ day }}">
+                                <option value="{{ selection[day] }}" selected >{{ selection[day] }}</option>
+                                {% for item in menu %}
+                                    <option value="{{ item }}">{{ item }}</option>
+                                {% endfor %}
+                            </select>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center"i>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="{{ day }}-ww" data-com.bitwarden.browser.user-edited="yes">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Whole Wheat</label>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 {% endfor %}
             </div>
