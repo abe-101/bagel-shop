@@ -6,43 +6,39 @@ Breakfast Selection
 
 {% block main %}
     <h1>Breakfast Selection</h1>
-    <form action="/selection" method="post">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Day</th>
-                <th>Sunday</th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednessday</th>
-                <th>Thursday</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Choice </td>
-                <td> {{ selection["sun"] }} </td>
-                <td> {{ selection["mon"] }} </td>
-                <td> {{ selection["tue"] }} </td>
-                <td> {{ selection["wed"] }} </td>
-                <td> {{ selection["thu"] }} </td>
-            </tr>
-            <tr>
-                <td>Choice </td>
-                {% for day in selection %}
-                    <td>
-                        <select name="{{ day }}">
-                            <option value="none" selected disabled hidden>Select</option>
-                            {% for item in menu %}
-                                <option value="{{ item }}">{{ item }}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-    <input type="submit" value="Submit">
-    </form>
-
+    <div class="container">
+        <form action="/selection" method="post">
+             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                 {% for day in selection %}
+                 <div class="col">
+                     <table class="table">
+                         <thead>
+                             <tr>
+                                 <th>{{ day }}</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td> {{ selection[day] }} </td>
+                             </tr>
+                             <tr>
+                                 <td>
+                                     <select class="form-select"name="{{ day }}">
+                                         <option value="none" selected disabled hidden>Select</option>
+                                         {% for item in menu %}
+                                             <option value="{{ item }}">{{ item }}</option>
+                                         {% endfor %}
+                                     </select>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </div>
+                 {% endfor %}
+             </div>
+            <div>
+                <input type="button" class="btn btn-primary" value="Submit">
+            </div>
+        </form>
+    </div>
 {% endblock %}
