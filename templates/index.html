@@ -5,40 +5,23 @@ Breakfast Selection
 {% endblock %}
 
 {% block main %}
-    <h1>Breakfast Selection</h1>
+<h1>Breakfast Selection</h1>
+<form data-bitwarden-watching="1" action="/selection" method="POST">
     <div class="container">
-        <form action="/selection" method="post">
-             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-                 {% for day in selection %}
-                 <div class="col">
-                     <table class="table">
-                         <thead>
-                             <tr>
-                                 <th>{{ day }}</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <tr>
-                                 <td> {{ selection[day] }} </td>
-                             </tr>
-                             <tr>
-                                 <td>
-                                     <select class="form-select"name="{{ day }}">
-                                         <option value="none" selected disabled hidden>Select</option>
-                                         {% for item in menu %}
-                                             <option value="{{ item }}">{{ item }}</option>
-                                         {% endfor %}
-                                     </select>
-                                 </td>
-                             </tr>
-                         </tbody>
-                     </table>
-                 </div>
-                 {% endfor %}
-             </div>
-            <div>
-                <input type="button" class="btn btn-primary" value="Submit">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            {% for day in selection %}
+            <div class="col">
+                <h3>{{ day }}</h3>
+                 <select class="form-select" name="{{ day }}">
+                    <option value="{{ selection[day] }}" selected >{{ selection[day] }}</option>
+                    {% for item in menu %}
+                        <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
             </div>
-        </form>
+            {% endfor %}
+        </div>
     </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 {% endblock %}
