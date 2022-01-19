@@ -7,9 +7,10 @@ Breakfast Selection
 {% block main %}
     <h1>Breakfast Selection</h1>
     <form action="/selection" method="post">
-    <table>
+    <table class="table">
         <thead>
             <tr>
+                <th>Day</th>
                 <th>Sunday</th>
                 <th>Monday</th>
                 <th>Tuesday</th>
@@ -19,6 +20,7 @@ Breakfast Selection
         </thead>
         <tbody>
             <tr>
+                <td>Choice </td>
                 <td> {{ selection["sun"] }} </td>
                 <td> {{ selection["mon"] }} </td>
                 <td> {{ selection["tue"] }} </td>
@@ -26,6 +28,7 @@ Breakfast Selection
                 <td> {{ selection["thu"] }} </td>
             </tr>
             <tr>
+                <td>Choice </td>
                 {% for day in selection %}
                     <td>
                         <select name="{{ day }}">
