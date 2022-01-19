@@ -65,7 +65,7 @@ def index():
     """Allow user to make a breakfast selection"""
     # Bagel shop selection menu
     # get user current selection
-    [pastSelection] = db.execute("SELECT sun AS Sunday, mon AS Monday, tue AS Tuesday, wed AS Wednessday, thu AS Thursday FROM users WHERE id = (?)", session["user_id"])
+    [pastSelection] = db.execute("SELECT sun, mon, tue, wed, thu FROM users WHERE id = (?)", session["user_id"])
     # Get menu from db as a list
     menu = [i['item'] for i in db.execute("SELECT item FROM menu")]
 
