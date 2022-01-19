@@ -6,11 +6,11 @@ nav .navbar-brand
 
 /* Colors for brand */
 .bg-wholesome {
-    background-color: #EDA85D;
+    background-color: #FF5001;
 }
 .list-group-item-mine {
     position:relative; display:block ; padding:.5rem 1rem;
-    color:#212529; text-decoration:none; background-color:#FDC484;
+    color:#212529; text-decoration:none; background-color:#7CBF4B;
     border:2px solid #333;
 }
 .btn-primary-mine {
