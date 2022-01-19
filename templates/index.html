@@ -11,8 +11,13 @@ Breakfast Selection
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
                 {% for day in selection %}
                 <div class="col">
-                    <h3>{{ day }}</h3>
-                     <select class="form-select" name="{{ day }}">
+                    <h2>{{ day }}</h2>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" data-com.bitwarden.browser.user-edited="yes">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Whole Wheat</label>
+                    </div>
+
+                    <select class="form-select" name="{{ day }}">
                         <option value="{{ selection[day] }}" selected >{{ selection[day] }}</option>
                         {% for item in menu %}
                             <option value="{{ item }}">{{ item }}</option>
