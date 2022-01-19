@@ -6,22 +6,22 @@ Breakfast Selection
 
 {% block main %}
 <h1>Breakfast Selection</h1>
-<form data-bitwarden-watching="1" action="/selection" method="POST">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-            {% for day in selection %}
-            <div class="col">
-                <h3>{{ day }}</h3>
-                 <select class="form-select" name="{{ day }}">
-                    <option value="{{ selection[day] }}" selected >{{ selection[day] }}</option>
-                    {% for item in menu %}
-                        <option value="{{ item }}">{{ item }}</option>
-                    {% endfor %}
-                </select>
+    <form data-bitwarden-watching="1" action = "/selection" method = "POST">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                {% for day in selection %}
+                <div class="col">
+                    <h3>{{ day }}</h3>
+                     <select class="form-select" name="{{ day }}">
+                        <option value="{{ selection[day] }}" selected >{{ selection[day] }}</option>
+                        {% for item in menu %}
+                            <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 {% endblock %}
