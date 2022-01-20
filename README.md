@@ -125,6 +125,7 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] Index.html
 	* Table display of weekly Selection 
 	* Change selection (bagel type button | filling drop down menu)
+- [x] Favicon (thank you [toastytortilla](https://github.com/toastytortilla))
 - [ ] Admin Pannel
 	* Aproave new user
 	* Change the menu
