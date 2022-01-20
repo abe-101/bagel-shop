@@ -1,6 +1,7 @@
 import os
 import datetime
-
+import markdown
+import markdown.extensions.fenced_code
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -8,7 +9,7 @@ from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_mail import Mail, Message
 from flask_apscheduler import APScheduler
-
+from pygments.formatters import HtmlFormatter
 from helpers import apology, login_required
 
 # Configure application
@@ -58,6 +59,17 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+@app.route("/about")
+def about():
+    readme_file = open("README.md", "r")
+    md_template_string = markdown.markdown(
+        readme_file.read(), extensions=["fenced_code", "codehilite"]
+    )
+    formatter = HtmlFormatter(style="emacs",full=True,cssclass="codehilite")
+    css_string = formatter.get_style_defs()
+    md_css_string = "<style>" + css_string + "</style>"
+    md_template = md_css_string + md_template_string
+    return md_template
 
 @app.route("/")
 @login_required

@@ -6,3 +6,6 @@ Flask-APScheduler
 gunicorn
 psycopg2
 requests
+markdown
+markdown.extensions.fenced_code
+pygments.formatters
