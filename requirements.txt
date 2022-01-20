@@ -7,3 +7,4 @@ gunicorn
 psycopg2
 requests
 markdown
+pygments
