@@ -1,6 +1,7 @@
 import os
 import datetime
-
+import markdown
+import markdown.extensions.fenced_code
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -8,7 +9,7 @@ from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_mail import Mail, Message
 from flask_apscheduler import APScheduler
-
+from pygments.formatters import HtmlFormatter
 from helpers import apology, login_required
 
 # Configure application
@@ -58,6 +59,17 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+@app.route("/about")
+def about():
+    readme_file = open("README.md", "r")
+    md_template_string = markdown.markdown(
+        readme_file.read(), extensions=["fenced_code", "codehilite"]
+    )
+    formatter = HtmlFormatter(style="emacs",full=True,cssclass="codehilite")
+    css_string = formatter.get_style_defs()
+    md_css_string = "<style>" + css_string + "</style>"
+    md_template = md_css_string + md_template_string
+    return md_template
 
 @app.route("/")
 @login_required
@@ -153,28 +165,34 @@ def register():
     if request.method == "POST":
 
         # Ensure username was submitted
-        if not request.form.get("username"):
+        email = request.form.get("username")
+        password = request.form.get("password")
+
+        if not email:
             return apology("must provide username", 400)
 
         # Check if username exists
-        elif len(db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))):
+        elif len(db.execute("SELECT * FROM users WHERE username = ?", email)):
             return apology("Sorry, username already taken", 400)
 
         # Ensure password was submitted
-        elif not request.form.get("password"):
+        elif not password:
             return apology("must provide password", 400)
 
         # Ensure password confirmed
-        elif request.form.get("password") != request.form.get("confirmation"):
+        elif password != request.form.get("confirmation"):
             return apology("password mismatch", 400)
 
         # Insert username into database
-        db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", request.form.get("username"),
-                   generate_password_hash(request.form.get("password")))
+        db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", email,
+                   generate_password_hash(password))
 
+        # Send welcome message
+        #message = Message("Thank you for registering", recipients=[email])
+        #mail.send(message)
 
         # Query database for username
-        rows = db.execute("SELECT id FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT id FROM users WHERE username = ?", email)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
