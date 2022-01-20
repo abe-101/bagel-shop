@@ -1,16 +1,17 @@
 # Bagel Shop
 <!-- If you'd like to use a logo instead uncomment this code and remove the text above this line
 
-  ![Logo](URL to logo img file goes here)
+  ![Logo](https://github.com/abe-101/bagel-shop/static/logo.png)
 
 -->
 
 Created by: [ABE](https://habet.dev/about) & [add your name](link)
 
-[![picture here]()
+![picture here](https://github.com/abe-101/bagel-shop/static/hompage.png)
 
 ## Description
-**Breakfast Roster** 
+**Breakfast Roster**
+
 
 ## Local Installation
 
@@ -104,6 +105,8 @@ Your Licensing Information goes here. Example: MIT/X11.
 ### New Technologies
 - [x] Flask-APScheduler
 - [ ] Flask-Admin
+- [ ] Flask-mail
+- [x] Flask-Markdown
 
 ### Web Framework (Flask | Gunicorn)
 - [x] Login
@@ -111,14 +114,15 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] Register
 - [x] index (users choice & update option
 - [x] selection POST (update users choice)
-- [x] Flask email (email menu)
-- [x] Flask-APScheduler (trigger email weekly)
+- [x] Flask email (resister confirmation | daily menu)
+- [x] Flask-APScheduler (trigger daily menu email)
+- [x] Render this README as about page
 
 ### Front-end (HTML | CSS | JS | Bootstrap)
-- [ ] login.html
+- [x] login.html
 - [ ] Logout.html
-- [ ] Register.html
-- [ ] Index.html
+- [x] Register.html
+- [x] Index.html
 	* Table display of weekly Selection 
 	* Change selection (bagel type button | filling drop down menu)
 - [ ] Admin Pannel
@@ -130,7 +134,7 @@ Your Licensing Information goes here. Example: MIT/X11.
 ### Database (Postgresql)
 - [x] User table with selection
 - [x] Menu table
-
+- [ ] Email confirmation column 
 
 ### Deployment (Github | Heroku | Cloudflare)
 - [x] github
