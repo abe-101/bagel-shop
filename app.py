@@ -45,7 +45,7 @@ if uri.startswith("postgres://"):
 db = SQL(uri)
 
 # interval example
-@scheduler.task('cron', id='do_job_1', week='*', day_of_week='thu', hour='9', minute='9')
+@scheduler.task('cron', id='do_job_1', week='*', day_of_week='thu', hour='9', minute='23')
 def job1():
     with scheduler.app.app_context():
         message = Message("test worked!", recipients=["app@habet.dev"])
