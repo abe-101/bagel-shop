@@ -152,28 +152,34 @@ def register():
     if request.method == "POST":
 
         # Ensure username was submitted
-        if not request.form.get("username"):
+        email = request.form.get("username")
+        password = request.form.get("password")
+
+        if not email:
             return apology("must provide username", 400)
 
         # Check if username exists
-        elif len(db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))):
+        elif len(db.execute("SELECT * FROM users WHERE username = ?", email)):
             return apology("Sorry, username already taken", 400)
 
         # Ensure password was submitted
-        elif not request.form.get("password"):
+        elif not password:
             return apology("must provide password", 400)
 
         # Ensure password confirmed
-        elif request.form.get("password") != request.form.get("confirmation"):
+        elif password != request.form.get("confirmation"):
             return apology("password mismatch", 400)
 
         # Insert username into database
-        db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", request.form.get("username"),
-                   generate_password_hash(request.form.get("password")))
+        db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", email,
+                   generate_password_hash(password))
 
+        # Send welcome message
+        #message = Message("Thank you for registering", recipients=[email])
+        #mail.send(message)
 
         # Query database for username
-        rows = db.execute("SELECT id FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT id FROM users WHERE username = ?", email)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
