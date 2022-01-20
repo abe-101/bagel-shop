@@ -87,7 +87,8 @@ def selection():
             continue
         elif choice in menu:
             if ww == 'on':
-                choice = "ww-"+choice
+                choice = "WW-"+choice
+            print(choice)
             db.execute(f"UPDATE users SET {day}=(?) WHERE id = (?)", choice, session["user_id"])
         else:
             return apology("Not a valid selection", 403)
