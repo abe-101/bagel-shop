@@ -45,7 +45,7 @@ if uri.startswith("postgres://"):
 db = SQL(uri)
 
 # interval example
-@scheduler.task('cron', id='do_job_1', week='*', day_of_week='mon', hour='14', minute='5')
+@scheduler.task('cron', id='do_job_1', week='*', day_of_week='thur', hour='9', minute='0')
 def job1():
     with scheduler.app.app_context():
         message = Message("test worked!", recipients=["app@habet.dev"])
@@ -188,8 +188,8 @@ def register():
                    generate_password_hash(password))
 
         # Send welcome message
-        #message = Message("Thank you for registering", recipients=[email])
-        #mail.send(message)
+        message = Message("Thank you for registering", recipients=[email])
+        mail.send(message)
 
         # Query database for username
         rows = db.execute("SELECT id FROM users WHERE username = ?", email)
