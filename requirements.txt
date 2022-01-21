@@ -8,4 +8,3 @@ psycopg2
 requests
 markdown
 pygments
-random
