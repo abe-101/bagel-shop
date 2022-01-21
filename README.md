@@ -5,7 +5,7 @@
 
 
 
-Created by: [ABE](https://habet.dev/about) & [add your name](link)
+Created by: [ABE](https://habet.dev/about)
 
 ![picture here](https://github.com/abe-101/bagel-shop/blob/main/static/bagel-shop.png)
 
