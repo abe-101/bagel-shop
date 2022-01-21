@@ -11,6 +11,7 @@ from flask_mail import Mail, Message
 from flask_apscheduler import APScheduler
 from pygments.formatters import HtmlFormatter
 from helpers import apology, login_required
+from random import *  
 
 # Configure application
 app = Flask(__name__)
@@ -43,6 +44,8 @@ uri = os.getenv("DATABASE_URL")
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 db = SQL(uri)
+
+otp = {}
 
 # interval example
 @scheduler.task('cron', id='do_job_1', week='*', day_of_week='thu', hour='9', minute='23')
@@ -118,23 +121,25 @@ def login():
     if request.method == "POST":
 
         # Ensure username was submitted
-        if not request.form.get("username"):
+        email = request.form.get("username")
+        password = request.form.get("password")
+        if not email:
             return apology("must provide username", 403)
 
         # Ensure password was submitted
-        elif not request.form.get("password"):
+        elif not password:
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM users WHERE username = ?", email)
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], password):
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
-
+        
         # Redirect user to home page
         return redirect("/")
 
@@ -186,22 +191,35 @@ def register():
         # Insert username into database
         db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", email,
                    generate_password_hash(password))
-
-        # Send welcome message
-        message = Message("Thank you for registering", recipients=[email])
-        mail.send(message)
-
+        
         # Query database for username
         rows = db.execute("SELECT id FROM users WHERE username = ?", email)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
 
-        # Redirect user to home page
-        return redirect("/")
+        # Generate a OTP
+        otp[session["user_id"]] = randint(000000,999999)   
+        
+        # Send otp message
+        msg = Message('OTP', recipients = [email]) 
+        msg.body = str(otp[session["user_id"]])  
+        mail.send(msg)  
+
+        # Redirect user to otp page
+        return render_template('verify.html')  
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("register.html")
+
+@app.route("/validate", methods=["POST"])
+def validate():
+    user_otp = request.form['otp']
+    if  otp[session["user_id"]] == int(user_otp):
+        flash('Email verification is successful')
+        return redirect("/")
+    return apology("failure, OTP does not match", 400)
+
 
 
