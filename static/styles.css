@@ -6,20 +6,20 @@ nav .navbar-brand
 
 /* Colors for brand */
 .bg-header-wholesome {
-    background-color: #FF5001;
+    background-color: #EDA909;
 }
 .bg-wholesome {
-    background-color: #fff;
+    background-color: #abA8A9;
 }
 .list-group-item-mine {
     position:relative; display:block ; padding:.5rem 1rem;
-    color:#212529; text-decoration:none; background-color:#7CBF4B;
+    color:#212529; text-decoration:none; background-color:#73926C;
     border:2px solid #333;
 }
 .btn-primary-mine {
     color: #fff;
-    background-color: #FF5001 !important;
-    border-color: #FF5001 !important;
+    background-color: #EDA909 !important;
+    border-color: #000 !important;
 }
 .capitalize {
     text-transform: capitalize;
