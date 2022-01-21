@@ -220,18 +220,18 @@ def register():
         db.execute("INSERT INTO users (username, hash, otp) VALUES(?, ?, ?)", email,
                    generate_password_hash(password), 'f')
         
-        # Query database for username
-        rows = db.execute("SELECT id FROM users WHERE username = ?", email)
+        # Query database for user id
+        [rows] = db.execute("SELECT id FROM users WHERE username = ?", email)
 
         # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
+        session["user_id"] = rows["id"]
 
         # Generate a OTP
-        otp[session["user_id"]] = randint(000000,999999)   
+        otp[rows["id"]] = randint(000000,999999)   
         
         # Send otp message
         msg = Message('Thank you for registering', recipients = [email]) 
-        msg.body = str(otp[session["user_id"]])  
+        msg.body = str(otp[rows["id"]])  
         mail.send(msg)  
 
         # Redirect user to otp page
@@ -245,8 +245,13 @@ def register():
 @login_required
 def validate():
     if request.method == "POST":
+        
+        # Query database for user id
+        [rows] = db.execute("SELECT id FROM users WHERE id = (?)", session["user_id"])
+
+        
         user_otp = request.form['otp']
-        if  otp[session["user_id"]] == int(user_otp):
+        if  otp[rows["id"]] == int(user_otp):
             db.execute("UPDATE users SET otp=(?) WHERE id = (?)", "t", session["user_id"])
 
             flash('Email verification is successful')
