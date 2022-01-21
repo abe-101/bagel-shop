@@ -5,8 +5,11 @@ nav .navbar-brand
 }
 
 /* Colors for brand */
-.bg-wholesome {
+.bg-header-wholesome {
     background-color: #FF5001;
+}
+.bg-wholesome {
+    background-color: #fff;
 }
 .list-group-item-mine {
     position:relative; display:block ; padding:.5rem 1rem;
