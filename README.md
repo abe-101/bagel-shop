@@ -9,6 +9,8 @@ Created by: [ABE](https://habet.dev/about)
 
 ![picture here](https://github.com/abe-101/bagel-shop/blob/main/static/bagel-shop.png)
 
+#### Video Demo: https://youtu.be/upUSN8B-Ohc
+
 ## Description
 **Breakfast Roster**
 
