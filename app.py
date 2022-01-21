@@ -3,7 +3,7 @@ import datetime
 import markdown
 import markdown.extensions.fenced_code
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, Markup
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -45,6 +45,7 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 db = SQL(uri)
 
+# otp Dict with file scope
 otp = {}
 
 # interval example
@@ -84,6 +85,9 @@ def index():
     # Get menu from db as a list
     menu = [i['item'] for i in db.execute("SELECT item FROM menu")]
 
+    [confirmed] = db.execute("SELECT otp FROM users WHERE id = (?)", session["user_id"])
+    if confirmed['otp'] == False:
+        flash(Markup('Email <a href="/validate">verification</a> is required.'))
     return render_template("index.html", selection=pastSelection, menu=menu)
 
 
@@ -108,7 +112,8 @@ def selection():
         else:
             return apology("Not a valid selection", 403)
 
-    return render_template("success.html")
+    flash('Selection recorded!')
+    return redirect("/")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -141,6 +146,7 @@ def login():
         session["user_id"] = rows[0]["id"]
         
         # Redirect user to home page
+        flash('Login successful!')
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -189,8 +195,8 @@ def register():
             return apology("password mismatch", 400)
 
         # Insert username into database
-        db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", email,
-                   generate_password_hash(password))
+        db.execute("INSERT INTO users (username, hash, otp) VALUES(?, ?, ?)", email,
+                   generate_password_hash(password), 'f')
         
         # Query database for username
         rows = db.execute("SELECT id FROM users WHERE username = ?", email)
@@ -213,13 +219,19 @@ def register():
     else:
         return render_template("register.html")
 
-@app.route("/validate", methods=["POST"])
+@app.route("/validate", methods=["GET", "POST"])
+@login_required
 def validate():
-    user_otp = request.form['otp']
-    if  otp[session["user_id"]] == int(user_otp):
-        flash('Email verification is successful')
-        return redirect("/")
-    return apology("failure, OTP does not match", 400)
+    if request.method == "POST":
+        user_otp = request.form['otp']
+        if  otp[session["user_id"]] == int(user_otp):
+            db.execute("UPDATE users SET otp=(?) WHERE id = (?)", "t", session["user_id"])
+
+            flash('Email verification is successful')
+            return redirect("/")
+        return apology("failure, OTP does not match", 400)
+    else:
+        return render_template("verify.html")
 
 
 
