@@ -116,6 +116,8 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] selection POST (update users choice)
 - [x] Flask email (resister confirmation | daily menu)
     - [ ] OTP email varification 
+    - [ ] Weakly email to bagel shop
+    - [x] Email me button
 - [x] Flask-APScheduler (trigger daily menu email)
 - [x] Render this README as about page
 - [x] OTP email varification 
@@ -139,7 +141,7 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] Github
 - [x] Connect Github to Heroku
 - [x] Auto deployment
-- [ ] Configure domain (Cloudflare)
+- [x] Configure domain (Cloudflare)
 
 ### README
 - [ ] Name
