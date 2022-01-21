@@ -1,17 +1,18 @@
 # Bagel Shop
 <!-- If you'd like to use a logo instead uncomment this code and remove the text above this line
-
-  ![Logo](https://github.com/abe-101/bagel-shop/static/logo.png)
-
 -->
+  ![Logo](https://github.com/abe-101/bagel-shop/blob/main/static/favicon-16x16.png)
+
+
 
 Created by: [ABE](https://habet.dev/about) & [add your name](link)
 
-![picture here](https://github.com/abe-101/bagel-shop/static/hompage.png)
+![picture here](https://github.com/abe-101/bagel-shop/blob/main/static/bagel-shop.png)
 
 ## Description
 **Breakfast Roster**
 
+A simple secure web app for groups to submit food orders. Featuring OTP email confirmation. 
 
 ## Local Installation
 
@@ -30,13 +31,31 @@ pip install Flask
 pip install Flask-Session
 pip install psycopg2-binary
 pip install requests
+pip install Flask-mail
+pip install requests
+pip install markdown
+pip install pygments
 ```
+## Database ##
+For this project we used Postgresql from Heroku.
+You will need to retreive a secret URI by navigating to to you Heroku app -> Heroku Postgresql -> Settings -> View Credentials
 
-export postgresql env key(replace URI with you db URI):
-
+copy the URI
 ```console
 export DATABASE_URL=URI
 ```
+replace URI with you db URI
+
+## Flask Mail ##
+
+You will need to export your username password and sender email:
+```
+export MAIL_DEFAULT_SENDER=bagel.shop.app@gmail.com
+export MAIL_PASSWORD=YOUR SECRET PASSWORD HERE
+export MAIL_USERNAME=bagel.shop.app
+```
+
+## Flask ##
 
 Start flask:
 ```console
@@ -46,16 +65,12 @@ flask run
 
 ## Usage
 
-Put the usage explanation here
-
-```erb
-<%= your_code_goes @here do |f| %>
-  <%= f.input :example %>
-  <%= f.input :example %>
-  <%= f.button :example %>
-<% end %>
-```
-
+* Password protected login
+* Email confirmation with OTP
+* Verification - Prevents malicious login attempts 
+* Select daily menu
+* Email bagel shop
+* Request breakfast selection via email
 
 ## Configuration
 
@@ -68,9 +83,9 @@ This block of text should explain how to configure your application:
 
 Screenshots of your application below:
 
-![Screenshot 1](http://placekitten.com/400/300)
+![Screenshot 1](https://github.com/abe-101/bagel-shop/blob/main/static/unverify.png)
 
-![Screenshot 2](http://placekitten.com/400/300)
+![Screenshot 2](https://github.com/abe-101/bagel-shop/blob/main/static/otp.png)
 
 
 
@@ -84,8 +99,13 @@ send us a pull request.
 ## Authors
 
 * [Abe](https:github.com/abe-101)
-* Additional Author's name (Their Github URL goes here)
-	
+
+## Credits
+
+* [toastytortilla](https://github.com/toastytortilla)
+* Blauelf
+
+
 
 ## Contributing
 
@@ -115,20 +135,20 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] index (users choice & update option
 - [x] selection POST (update users choice)
 - [x] Flask email (resister confirmation | daily menu)
-    - [ ] OTP email varification 
+    - [x] OTP email verification 
     - [ ] Weakly email to bagel shop
     - [x] Email me button
 - [x] Flask-APScheduler (trigger daily menu email)
 - [x] Render this README as about page
-- [x] OTP email varification 
+- [x] OTP email verification 
 
 ### Front-end (HTML | CSS | JS | Bootstrap)
 - [x] login.html
 - [x] Logout.html
 - [x] Register.html
 - [x] Index.html
-	* Table display of weekly Selection 
-	* Change selection (bagel type button | filling drop down menu)
+	- [x] Table display of weekly Selection 
+	- [x] Change selection (bagel type button | filling drop down menu)
 - [x] Favicon (thank you [toastytortilla](https://github.com/toastytortilla))
 
 
@@ -144,10 +164,10 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] Configure domain (Cloudflare)
 
 ### README
-- [ ] Name
-- [ ] Local Setup
+- [x] Name
+- [x] Local Setup
 - [x] Known Issues
 - [x] Authors
 - [x] Contributing
-- [ ] License
-- [ ] Road Map
+- [x] License
+- [x] Road Map
