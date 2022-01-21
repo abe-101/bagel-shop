@@ -115,6 +115,28 @@ def selection():
     flash('Selection recorded!')
     return redirect("/")
 
+@app.route("/email", methods=["POST"])
+@login_required
+def email():
+
+    # get user current selection
+    [pastSelection] = db.execute("SELECT sunday, monday, tuesday, wednessday, thursday FROM users WHERE id = (?)", session["user_id"])
+
+    [address] = db.execute("SELECT username FROM users WHERE id = ?",  session["user_id"])
+    email=address['username']
+
+    [confirmed] = db.execute("SELECT otp FROM users WHERE id = (?)", session["user_id"])
+    if confirmed['otp'] == False:
+        return apology("Unverified email", 400)
+
+    msg = Message("Hello", recipients=[email])
+    msg.html = render_template("email.html", selection=pastSelection)
+    #msg = Message('Weekly breakfast', recipients = [email], html = render_template("email.html", selection=pastSelection))
+    mail.send(msg)
+
+    flash('Email sent')
+    return redirect("/")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
