@@ -1,7 +1,7 @@
 # Bagel Shop
 <!-- If you'd like to use a logo instead uncomment this code and remove the text above this line
 -->
-  ![Logo](https://github.com/abe-101/bagel-shop/blob/main/static/favicon-16x16.png)
+  ![Logo](https://github.com/abe-101/bagel-shop/blob/main/static/favicon-96x96.png)
 
 
 
