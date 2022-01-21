@@ -208,7 +208,7 @@ def register():
         otp[session["user_id"]] = randint(000000,999999)   
         
         # Send otp message
-        msg = Message('OTP', recipients = [email]) 
+        msg = Message('Thank you for registering', recipients = [email]) 
         msg.body = str(otp[session["user_id"]])  
         mail.send(msg)  
 
