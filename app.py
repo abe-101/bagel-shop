@@ -246,7 +246,7 @@ def register():
 def validate():
     if request.method == "POST":
         user_otp = request.form['otp']
-        if  otp[session["user_id"]] == int(request.form.get("otp")):
+        if  otp[session["user_id"]] == int(user_otp):
             db.execute("UPDATE users SET otp=(?) WHERE id = (?)", "t", session["user_id"])
 
             flash('Email verification is successful')
