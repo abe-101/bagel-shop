@@ -104,9 +104,9 @@ Your Licensing Information goes here. Example: MIT/X11.
 
 ### New Technologies
 - [x] Flask-APScheduler
-- [ ] Flask-Admin
-- [ ] Flask-mail
+- [X] Flask-mail
 - [x] Flask-Markdown
+- [x] OTP Email verification
 
 ### Web Framework (Flask | Gunicorn)
 - [x] Login
@@ -115,39 +115,37 @@ Your Licensing Information goes here. Example: MIT/X11.
 - [x] index (users choice & update option
 - [x] selection POST (update users choice)
 - [x] Flask email (resister confirmation | daily menu)
+    - [ ] OTP email varification 
 - [x] Flask-APScheduler (trigger daily menu email)
 - [x] Render this README as about page
+- [x] OTP email varification 
 
 ### Front-end (HTML | CSS | JS | Bootstrap)
 - [x] login.html
-- [ ] Logout.html
+- [x] Logout.html
 - [x] Register.html
 - [x] Index.html
 	* Table display of weekly Selection 
 	* Change selection (bagel type button | filling drop down menu)
 - [x] Favicon (thank you [toastytortilla](https://github.com/toastytortilla))
-- [ ] Admin Pannel
-	* Aproave new user
-	* Change the menu
-	* View/Print the weekly menu
 
 
 ### Database (Postgresql)
 - [x] User table with selection
 - [x] Menu table
-- [ ] Email confirmation column 
+- [x] Email confirmation column (OTP)
 
 ### Deployment (Github | Heroku | Cloudflare)
-- [x] github
-- [x] Connect github to heroku
+- [x] Github
+- [x] Connect Github to Heroku
 - [x] Auto deployment
-- [ ] Configure domain
+- [ ] Configure domain (Cloudflare)
 
 ### README
 - [ ] Name
 - [ ] Local Setup
 - [x] Known Issues
-- [x] Authers
+- [x] Authors
 - [x] Contributing
 - [ ] License
 - [ ] Road Map

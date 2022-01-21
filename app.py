@@ -231,7 +231,9 @@ def validate():
             return redirect("/")
         return apology("failure, OTP does not match", 400)
     else:
-        return render_template("verify.html")
+        [address] = db.execute("SELECT username FROM users WHERE id = ?",  session["user_id"])
+
+        return render_template("verify.html", email=address['username'])
 
 
 
