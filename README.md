@@ -39,8 +39,8 @@ pip install markdown
 pip install pygments
 ```
 ## Database ##
-For this project we used Postgresql from Heroku.
-You will need to retreive a secret URI by navigating to to you Heroku app -> Heroku Postgresql -> Settings -> View Credentials
+For this project we use Postgresql from Heroku.
+You will need to retreive a secret URI by navigating to the Heroku [dashboard](https://dashboard.heroku.com/) Heroku app -> Heroku Postgresql -> Settings -> View Credentials
 
 copy the URI
 ```console
